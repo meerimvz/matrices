@@ -40,4 +40,33 @@ def place_ships():
                         ships.append(((x, y), orientation, ship_size))
                         placed = True
 
+        return booard, ships
+
+def make_shot(board, ships, x, y):
+    if board[x][y] != " " and board[x][y] != HIT and board[x][y] != MISS:
+        board[x][y] = HIT
+        for ship in ships:
+            if ship[0] == (x, y):  
+                ship[2] -= 1  
+                if ship[2] == 0:  
+                    mark_sunk(board, ship)
+        return HIT
+    else:
+        board[x][y] = MISS
+        return MISS
+
+def mark_sunk(board, ship):
+    for i in range(ship[2]):
+        x, y = ship[0]
+        if ship[1] == "horizontal":
+            board[x][y + i] = SUNK
+        elif ship[1] == "vertical":
+            board[x + i][y] = SUNK
+
+def play_game():
+    player_name = input("Enter your name: ")
+    board, ships = place_ships()
+    shots_taken = 0
+
+
 
