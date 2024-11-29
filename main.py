@@ -67,6 +67,51 @@ def play_game():
     player_name = input("Enter your name: ")
     board, ships = place_ships()
     shots_taken = 0
+    
+while True:
+        display_board(board)
+        print(f"Ships left: {sum(s[2] for s in ships)}")
+        
+        coordinates = input("Enter coordinates (x y): ").split()
+        if len(coordinates) != 2:
+            print("Invalid input. Please enter two numbers separated by space.")
+            continue
+        
+        x, y = coordinates
+        if not x.isdigit() or not y.isdigit():
+            print("Invalid input. Coordinates must be numbers.")
+            continue
+        
+        x, y = int(x), int(y)
+        if 0 <= x < BOARD_SIZE and 0 <= y < BOARD_SIZE:
+            result = make_shot(board, ships, x, y)
+            print(f"You {result}!")
+            shots_taken += 1
+        else:
+            print("Invalid coordinates. Try again.")
+            continue
+        
+        if all(ship[2] == 0 for ship in ships):
+            print(f"Congratulations {player_name}, you won!")
+            print(f"It took you {shots_taken} shots.")
+            return shots_taken
+        else:
+            input("Press Enter to continue.")
+
+def main():
+    players_scores = []
+    while True:
+        shots_taken = play_game()
+        players_scores.append(shots_taken)
+        
+        play_again = input("Do you want to play again? (y/n): ").lower()
+        if play_again != "y":
+            break
+    
+    players_scores.sort()
+    print("\nPlayer Scores:")
+    for i, score in enumerate(players_scores, 1):
+        print(f"Rank {i}: {score} shots")
 
 
 
