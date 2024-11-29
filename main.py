@@ -16,4 +16,28 @@ def clear_screen():
     for i, row in enumerate(board):
         print(f"{i} {' '.join(row)}")
     print()
+def place_ships():
+    board = create_board()
+    ships = []
+
+    for ship_size, count in SHIP_TYPES.items():
+        for _ in range(count):
+            placed = False
+            while not placed:
+                x, y = random.randint(0, BOARD_SIZE-1), random.randint(0, BOARD_SIZE-1)
+                orientation = random.choice(["horizontal", "vertical"])
+
+                if orientation == "horizontal" and y + ship_size <= BOARD_SIZE:
+                    if all(board[x][y + i] == " " for i in range(ship_size)):
+                        for i in range(ship_size):
+                            board[x][y + i] = str(ship_size)
+                        ships.append(((x, y), orientation, ship_size))
+                        placed = True
+                elif orientation == "vertical" and x + ship_size <= BOARD_SIZE:
+                    if all(board[x + i][y] == " " for i in range(ship_size)):
+                        for i in range(ship_size):
+                            board[x + i][y] = str(ship_size)
+                        ships.append(((x, y), orientation, ship_size))
+                        placed = True
+
 
