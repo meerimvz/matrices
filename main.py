@@ -11,6 +11,23 @@ def create_freezone():
         for j in range(7):
             freezone.add((i,j))
 
+def random_direction():
+    return random.randint(0, 1)
+
+def del_from_freezone(coordinates):
+    for coordinate in coordinates:
+        freezone.discard(coordinate)
+        x, y = coordinate[0], coordinate[1]
+        freezone.discard((x + 1, y))
+        freezone.discard((x - 1, y))
+        freezone.discard((x, y + 1))
+        freezone.discard((x, y - 1))
+        freezone.discard((x + 1, y + 1))
+        freezone.discard((x - 1, y - 1))
+        freezone.discard((x + 1, y - 1))
+        freezone.discard((x - 1, y + 1))
+
+
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
     print("  0 1 2 3 4 5 6")
