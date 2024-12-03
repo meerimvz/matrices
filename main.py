@@ -1,14 +1,15 @@
 import os
 import random
 
-BOARD_SIZE = 7
-SHIP_TYPES = {3: 1, 2: 2, 1: 4}  
-HIT = "H"
-MISS = "M"
-SUNK = "S"
+ships = []
+freezone = set()
 
-def create_board():
-    return [[" " for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
+def create_freezone():
+    global freezone
+    freezone = set()
+    for i in range(7):
+        for j in range(7):
+            freezone.add((i,j))
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
