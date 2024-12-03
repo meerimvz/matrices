@@ -168,6 +168,16 @@ def play_game():
             clear_screen()
             print(f"Congratulations {name}! You won in {shots} shots!")
             break
+
+     replay = input("Do you want to play again? (yes/no): ").strip().lower()
+    if replay == 'yes':
+        play_game()
+    else:
+        print("Thanks for playing!")
+
+if __name__ == "__main__":
+    play_game()
+
             
 
 
