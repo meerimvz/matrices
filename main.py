@@ -63,6 +63,32 @@ def medium_ship():
             else:
                 medium_ship()
 
+def one_ship():
+    global ships
+    global freezone
+    first_cell = random.choice(list(freezone))
+    ships.append([first_cell])
+    del_from_freezone([first_cell])
+
+def last_one_ship():
+    global ships
+    global freezone
+    if len(freezone) == 0:
+        ships = []
+        create_freezone()
+        big_ship()
+        medium_ship()
+        medium_ship()
+        one_ship()
+        one_ship()
+        one_ship()
+        last_one_ship()
+    else:
+        first_cell = random.choice(list(freezone))
+        ships.append([first_cell])
+        del_from_freezone([first_cell])
+
+
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
