@@ -41,13 +41,32 @@ def big_ship():
     ships.append([first_cell, second_cell, third_cell])
     del_from_freezone([first_cell, second_cell, third_cell])
 
+def medium_ship():
+    global ships
+    global freezone
+    if random_direction() == 1:
+        first_cell = random.choice(list(freezone))
+        if 0 <= first_cell[0] <= 6 and 0 <= first_cell[1] <= 5:
+            second_cell = (first_cell[0], first_cell[1] + 1)
+            if second_cell in freezone:
+                ships.append([first_cell, second_cell])
+                del_from_freezone([first_cell, second_cell])
+            else:
+                medium_ship()
+    else:
+        first_cell = random.choice(list(freezone))
+        if 0 <= first_cell[0] <= 5 and 0 <= first_cell[1] <= 6:
+            second_cell = (first_cell[0] + 1, first_cell[1])
+            if second_cell in freezone:
+                ships.append([first_cell, second_cell])
+                del_from_freezone([first_cell, second_cell])
+            else:
+                medium_ship()
+
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
-    print("  0 1 2 3 4 5 6")
-    for i, row in enumerate(board):
-        print(f"{i} {' '.join(row)}")
-    print()
+    
 def place_ships():
     board = create_board()
     ships = []
