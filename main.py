@@ -88,10 +88,29 @@ def last_one_ship():
         ships.append([first_cell])
         del_from_freezone([first_cell])
 
-
+def field_generation():
+    global ships
+    create_freezone()
+    big_ship()
+    medium_ship()
+    medium_ship()
+    one_ship()
+    one_ship()
+    one_ship()
+    last_one_ship()
+    return ships
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
+
+def create_empty_board():
+    return [['*' for _ in range(7)] for _ in range(7)]
+
+def display_board(board):
+    print("    0   1   2   3   4   5   6")
+    for i, row in enumerate(board):
+        print(f"{chr(65 + i)}  {'   '.join(row)}")
+
     
 def place_ships():
     board = create_board()
