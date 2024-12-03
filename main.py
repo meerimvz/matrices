@@ -27,6 +27,20 @@ def del_from_freezone(coordinates):
         freezone.discard((x + 1, y - 1))
         freezone.discard((x - 1, y + 1))
 
+def big_ship():
+    global freezone
+    global ships
+    if random_direction() == 1:
+        first_cell = (random.randint(0,6), random.randint(0,4))
+        second_cell = (first_cell[0], first_cell[1] + 1)
+        third_cell = (first_cell[0], first_cell[1] + 2)
+    else:
+        first_cell = (random.randint(0,4), random.randint(0,6))
+        second_cell = (first_cell[1] + 1, first_cell[0])
+        third_cell = (first_cell[1] + 2, first_cell[0])
+    ships.append([first_cell, second_cell, third_cell])
+    del_from_freezone([first_cell, second_cell, third_cell])
+
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
