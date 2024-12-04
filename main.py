@@ -170,9 +170,9 @@ def play_game():
             break
 
      replay = input("Do you want to play again? (yes/no): ").strip().lower()
-    if replay == 'yes':
+     if replay == 'yes':
         play_game()
-    else:
+     else:
         print("Thanks for playing!")
 
 if __name__ == "__main__":
