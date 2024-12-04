@@ -130,7 +130,7 @@ def check_victory(ships, board):
     return all(all(board[r][c] == 'S' for r, c in ship) for ship in ships)
 
 def play_game():
-    player_name = input("Enter your name: ")
+    name = input("Enter your name: ")
     clear_screen()
     player_board = create_empty_board()
     ships = field_generation()
@@ -169,10 +169,10 @@ def play_game():
             print(f"Congratulations {name}! You won in {shots} shots!")
             break
 
-     replay = input("Do you want to play again? (yes/no): ").strip().lower()
-     if replay == 'yes':
+    replay = input("Do you want to play again? (yes/no): ").strip().lower()
+    if replay == 'yes':
         play_game()
-     else:
+    else:
         print("Thanks for playing!")
 
 if __name__ == "__main__":
