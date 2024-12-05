@@ -174,8 +174,7 @@ def play_game():
         play_game()
     else:
         print("Thanks for playing!")
-
-if __name__ == "__main__":
+        
     play_game()
 
             
